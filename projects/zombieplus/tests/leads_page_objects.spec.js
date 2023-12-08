@@ -2,13 +2,17 @@
 const { test, expect } = require('@playwright/test');
 const { LandingPage } = require('./pages/LandingPage')
 
+let landingPage;
+
+test.beforeEach(async ({ page }) => {
+  landingPage = new LandingPage(page)
+})
+
   const message = "Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!"
   const name = "primeiro teste"
   const email = "primeiro_teste@teste.com"
 
 test('deve cadastrar um lead na fila de espera', async ({ page }) => {
-
-  const landingPage = new LandingPage(page)
 
   await landingPage.visit()
   await landingPage.openLeadModal()
@@ -18,8 +22,6 @@ test('deve cadastrar um lead na fila de espera', async ({ page }) => {
 
 test('não deve cadastrar com email incorreto', async ({ page }) => {
 
-  const landingPage = new LandingPage(page)
-
   await landingPage.visit()
   await landingPage.openLeadModal()
   await landingPage.submitLeadForm(name, 'segundoteste.com.br')
@@ -28,8 +30,6 @@ test('não deve cadastrar com email incorreto', async ({ page }) => {
 });
 
 test('não deve cadastrar quando o nome não é preenchido', async ({ page }) => {
-  
-  const landingPage = new LandingPage(page)
 
   await landingPage.visit()
   await landingPage.openLeadModal()
@@ -39,8 +39,6 @@ test('não deve cadastrar quando o nome não é preenchido', async ({ page }) =>
 });
 
 test('não deve cadastrar quando o email não é preenchido', async ({ page }) => {
-  
-  const landingPage = new LandingPage(page)
 
   await landingPage.visit()
   await landingPage.openLeadModal()
@@ -50,8 +48,6 @@ test('não deve cadastrar quando o email não é preenchido', async ({ page }) =
 });
 
 test('não deve cadastrar quando o nenhum campo é preenchido', async ({ page }) => {
-  
-  const landingPage = new LandingPage(page)
 
   await landingPage.visit()
   await landingPage.openLeadModal()
