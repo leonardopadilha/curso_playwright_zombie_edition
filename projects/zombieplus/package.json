@@ -1,0 +1,17 @@
+{
+  "name": "zombieplus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:play:ui": "npx playwright test --ui",
+    "test:play:h": "npx playwright test --headed"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.39.0",
+    "@types/node": "^20.9.0"
+  }
+}

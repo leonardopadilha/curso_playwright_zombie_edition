@@ -1,0 +1,92 @@
+// @ts-check
+const { test, expect } = require('@playwright/test');
+
+test('deve cadastrar um lead na fila de espera', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+  //await page.click("//button[text() ='Aperte o play... se tiver coragem']")
+  //await page.getByRole('button', { name: 'Aperte o play... se tiver coragem' }).click()
+  await page.getByRole('button', { name: /Aperte o play/ }).click()
+  
+  await expect(page.getByTestId('modal').getByRole('heading')).toHaveText('Fila de espera')
+
+  //await page.getByTestId('#name').fill('papito@yahoo.com') -> própria para encontrar atributos como: data-testid
+  //await page.locator('#name').fill('teste@teste.com')
+  //await page.locator("input[name=name]").fill('teste@teste.com')
+  //await page.locator("input[placeholder='Informe seu nome']").fill('teste@teste.com')
+  await page.getByPlaceholder('Informe seu nome').fill('Primeiro Teste')
+  await page.getByPlaceholder('Informe seu email').fill('primeiro_teste@teste.com')
+  //await page.getByText('Quero entrar na fila!').click()
+  //await page.getByRole('button', { name: /Quero entrar na fila/ }).click()
+  await page.getByTestId('modal').getByText('Quero entrar na fila!').click()
+
+ /*  await page.getByText('seus dados conosco').click() // click no modal
+  const content = await page.content() // Obter código html de toda a página no momento do click anterior
+  console.log(content) */
+
+  const message = "Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!"
+  await expect(page.locator('.toast')).toHaveText(message)
+
+  await expect(page.locator('.toast')).toBeHidden({ timeout: 5000 }) // verifica se o elemento ficará invisível, nesse caso, em até 5 segundos (ou seja, apareceu e "foi embora")
+
+  
+  //await page.waitForTimeout(10000)
+});
+
+test('não deve cadastrar com email incorreto', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  await page.getByRole('button', { name: /Aperte o play/ }).click()
+  
+  await expect(page.getByTestId('modal').getByRole('heading')).toHaveText('Fila de espera')
+
+  await page.getByPlaceholder('Informe seu nome').fill('Segundo Teste')
+  await page.getByPlaceholder('Informe seu email').fill('segundoteste.com.br')
+
+  await page.getByTestId('modal').getByText('Quero entrar na fila!').click()
+
+  await expect(page.locator('.alert')).toHaveText('Email incorreto')
+});
+
+test('não deve cadastrar quando o nome não é preenchido', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  await page.getByRole('button', { name: /Aperte o play/ }).click()
+  
+  await expect(page.getByTestId('modal').getByRole('heading')).toHaveText('Fila de espera')
+
+  await page.getByPlaceholder('Informe seu email').fill('terceiro.teste@email.com')
+
+  await page.getByTestId('modal').getByText('Quero entrar na fila!').click()
+
+  await expect(page.locator('.alert')).toHaveText('Campo obrigatório')
+});
+
+test('não deve cadastrar quando o email não é preenchido', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  await page.getByRole('button', { name: /Aperte o play/ }).click()
+  
+  await expect(page.getByTestId('modal').getByRole('heading')).toHaveText('Fila de espera')
+
+  await page.getByPlaceholder('Informe seu nome').fill('Quarto Teste')
+
+  await page.getByTestId('modal').getByText('Quero entrar na fila!').click()
+
+  await expect(page.locator('.alert')).toHaveText('Campo obrigatório')
+});
+
+test('não deve cadastrar quando o nenhum campo é preenchido', async ({ page }) => {
+  await page.goto('http://localhost:3000');
+
+  await page.getByRole('button', { name: /Aperte o play/ }).click()
+  
+  await expect(page.getByTestId('modal').getByRole('heading')).toHaveText('Fila de espera')
+
+  await page.getByTestId('modal').getByText('Quero entrar na fila!').click()
+
+  await expect(page.locator('.alert')).toHaveText([
+    'Campo obrigatório',
+    'Campo obrigatório'
+  ]) // mensagem para o campo nome e email
+});
+
