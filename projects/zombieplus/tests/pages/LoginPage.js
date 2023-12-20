@@ -19,11 +19,19 @@ export class LoginPage {
     }
 
     async isLoggedIn() {
-        await this.page.waitForLoadState('networkidle') // aguarda o carregamento da rede
+        // aguarda o carregamento da rede
+        await this.page.waitForLoadState('networkidle')
 
         const logoutLink = this.page.locator('a[href="/logout"]')
         await expect(logoutLink).toBeVisible()
 
-        await expect(this.page).toHaveURL(/.*admin/) // verificando se na url tem a palavra admin
+        // verificando se na url tem a palavra admin
+        await expect(this.page).toHaveURL(/.*admin/)
+    }
+
+    async alertHaveText(text) {
+        //último caractere na classe do css
+        const alert = this.page.locator("span[class$='alert']") 
+        await expect(alert).toHaveText(text)
     }
 }
