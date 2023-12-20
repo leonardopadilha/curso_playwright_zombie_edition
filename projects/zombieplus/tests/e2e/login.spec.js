@@ -34,3 +34,10 @@ test('não deve logar quando o email é inválido', async ({ page }) => {
 
     await loginPage.alertHaveText('Email incorreto')
 })
+
+test('não deve logar quando o email não é preenchido', async ({ page }) => {
+    await loginPage.visit()
+    await loginPage.submit("", password)
+
+    await loginPage.alertHaveText('Campo obrigatório')
+})
