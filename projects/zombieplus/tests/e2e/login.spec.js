@@ -42,9 +42,19 @@ test('não deve logar quando o email não é preenchido', async ({ page }) => {
     await loginPage.alertHaveText('Campo obrigatório')
 })
 
-test('não deve logar quando a senha não é preenchido', async ({ page }) => {
+test('não deve logar quando a senha não é preenchida', async ({ page }) => {
     await loginPage.visit()
     await loginPage.submit(email, "")
 
     await loginPage.alertHaveText('Campo obrigatório')
+})
+
+test('não deve logar quando nenhum campo é preenchido', async ({ page }) => {
+    await loginPage.visit()
+    await loginPage.submit("", "")
+
+    await loginPage.alertHaveText([
+        'Campo obrigatório',
+        'Campo obrigatório'
+    ])
 })
