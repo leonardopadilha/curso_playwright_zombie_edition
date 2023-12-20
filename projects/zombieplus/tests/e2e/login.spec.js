@@ -19,11 +19,18 @@ test('deve logar como adminstrador', async ({ page }) => {
     await loginPage.isLoggedIn()
 })
 
-test('não deve logar como senha incorreta', async ({ page }) => {
+test('não deve logar com senha incorreta', async ({ page }) => {
     await loginPage.visit()
     await loginPage.submit(email, "incorrect-password")
 
     const message = 'Oops!Ocorreu um erro ao tentar efetuar o login. Por favor, verifique suas credenciais e tente novamente.'
 
     await toast.haveText(message)
+})
+
+test('não deve logar quando o email é inválido', async ({ page }) => {
+    await loginPage.visit()
+    await loginPage.submit("www.papito.com.br", password)
+
+    await loginPage.alertHaveText('Email incorreto')
 })
