@@ -1,6 +1,7 @@
 // @ts-check
-const { test, expect } = require('@playwright/test');
+const { test, expect } = require('@playwright/test')
 const { LandingPage } = require('../pages/LandingPage')
+const { faker } = require('@faker-js/faker')
 
 let landingPage;
 
@@ -9,8 +10,8 @@ test.beforeEach(async ({ page }) => {
 })
 
   const message = "Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!"
-  const name = "primeiro teste"
-  const email = "primeiro_teste@teste.com"
+  const name = faker.person.fullName()
+  const email = faker.internet.email()
 
 test('deve cadastrar um lead na fila de espera', async ({ page }) => {
 

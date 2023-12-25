@@ -33,7 +33,7 @@ export class LandingPage {
 
         await expect(toast).toHaveText(message)
         //await expect(toast).toBeHidden({ timeout: 5000 }) // verifica se o elemento ficará invisível, nesse caso, em até 5 segundos (ou seja, apareceu e "foi embora")
-        await expect(toast).not.toBeVisible({ timeout: 5000 })
+        await expect(toast).not.toBeVisible({ timeout: 7000 })
     }
 
     async alertHaveText(target) {
