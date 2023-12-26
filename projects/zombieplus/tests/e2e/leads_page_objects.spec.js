@@ -5,19 +5,35 @@ const { faker } = require('@faker-js/faker')
 
 let landingPage;
 
+let leadName;
+let leadEmail;
+
 test.beforeEach(async ({ page }) => {
   landingPage = new LandingPage(page)
 })
 
-  const message = "Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!"
-  const name = faker.person.fullName()
-  const email = faker.internet.email()
+test.beforeAll(async () => {
+  leadName = faker.person.fullName()
+  leadEmail = faker.internet.email()
+})
 
 test('deve cadastrar um lead na fila de espera', async ({ page }) => {
 
+  const leadMessage = "Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!"
+  
   await landingPage.visit()
   await landingPage.openLeadModal()
-  await landingPage.submitLeadForm(name, email)
+  await landingPage.submitLeadForm(leadName, leadEmail)
+  await landingPage.toastHaveText(leadMessage)
+});
+
+test('não deve cadastrar quando o email já existe', async ({ page }) => {
+
+let message = "O endereço de e-mail fornecido já está registrado em nossa fila de espera."
+
+  await landingPage.visit()
+  await landingPage.openLeadModal()
+  await landingPage.submitLeadForm(leadName, leadEmail)
   await landingPage.toastHaveText(message)
 });
 
@@ -25,7 +41,7 @@ test('não deve cadastrar com email incorreto', async ({ page }) => {
 
   await landingPage.visit()
   await landingPage.openLeadModal()
-  await landingPage.submitLeadForm(name, 'segundoteste.com.br')
+  await landingPage.submitLeadForm(leadName, 'segundoteste.com.br')
 
   await landingPage.alertHaveText('Email incorreto')
 });
@@ -34,7 +50,7 @@ test('não deve cadastrar quando o nome não é preenchido', async ({ page }) =>
 
   await landingPage.visit()
   await landingPage.openLeadModal()
-  await landingPage.submitLeadForm("", email)
+  await landingPage.submitLeadForm("", leadEmail)
 
   await landingPage.alertHaveText('Campo obrigatório')
 });
@@ -43,7 +59,7 @@ test('não deve cadastrar quando o email não é preenchido', async ({ page }) =
 
   await landingPage.visit()
   await landingPage.openLeadModal()
-  await landingPage.submitLeadForm(name, "")
+  await landingPage.submitLeadForm(leadName, "")
   
   await landingPage.alertHaveText('Campo obrigatório')
 });
