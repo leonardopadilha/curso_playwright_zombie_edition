@@ -37,6 +37,28 @@ let message = "O endereço de e-mail fornecido já está registrado em nossa fil
   await landingPage.toastHaveText(message)
 });
 
+test('não deve cadastrar quando o email já salvo através da API', async ({ page, request }) => {
+
+  const name = faker.person.fullName()
+  const email = faker.internet.email()
+
+  let message = "O endereço de e-mail fornecido já está registrado em nossa fila de espera."
+
+  const newLead = await request.post('http://localhost:3333/leads', {
+    data: {
+      name: name,
+      email: email
+    }
+  })
+
+  expect(newLead.ok()).toBeTruthy()
+  
+    await landingPage.visit()
+    await landingPage.openLeadModal()
+    await landingPage.submitLeadForm(name, email)
+    await landingPage.toastHaveText(message)
+  });
+
 test('não deve cadastrar com email incorreto', async ({ page }) => {
 
   await landingPage.visit()
