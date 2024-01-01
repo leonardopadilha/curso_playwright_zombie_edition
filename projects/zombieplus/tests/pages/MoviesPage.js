@@ -15,4 +15,9 @@ export class MoviesPage {
         // verificando se na url tem a palavra admin
         await expect(this.page).toHaveURL(/.*admin/)
     }
+
+    async create(title, overview, company, release_year) {
+        //o selector abaixo termina com register
+        await this.page.locator('a[href$="register"]').click()
+    }
 }
