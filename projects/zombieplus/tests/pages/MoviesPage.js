@@ -19,5 +19,13 @@ export class MoviesPage {
     async create(title, overview, company, release_year) {
         //o selector abaixo termina com register
         await this.page.locator('a[href$="register"]').click()
+        //await this.page.locator('#title').fill(title)
+
+        /*
+        Quando o label tem uma conexão com o for e o id, é possível
+        realizar a automação utilizando o nome (label) do campo
+        */
+        await this.page.getByLabel('Titulo do filme').fill(title)
+        await this.page.getByLabel('Sinopse').fill(overview)
     }
 }
