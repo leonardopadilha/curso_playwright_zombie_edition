@@ -24,5 +24,5 @@ test('deve poder cadastrar um novo filme', async ({ page }) => {
     await loginPage.submit(email, password)
     await moviesPage.isLoggedIn()
 
-    await moviesPage.create('Nome do filme', 'Sinopse do filme', 'Empresa', 2023)
+    await moviesPage.create('Nome do filme', 'Sinopse do filme', 'Netflix', '1970')
 })

@@ -27,5 +27,25 @@ export class MoviesPage {
         */
         await this.page.getByLabel('Titulo do filme').fill(title)
         await this.page.getByLabel('Sinopse').fill(overview)
+
+        await this.page.locator('#select_company_id .react-select__indicator').click()
+
+        // Irá salvar e retornar o html obtido através do click anterior
+        /* const html = await this.page.content()
+        console.log(html) */
+
+        await this.page.locator('.react-select__option')
+                            .filter({hasText: company})
+                                .click()
+
+        
+        await this.page.locator('#select_year .react-select__indicator').click()
+
+/*         const year = await this.page.content()
+        console.log(year)
+ */
+        await this.page.locator('.react-select__option')
+                            .filter({ hasText: release_year })
+                                .click()
     }
 }
