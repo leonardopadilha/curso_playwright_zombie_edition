@@ -1,8 +1,14 @@
 const { expect } = require('@playwright/test')
 
-export class LoginPage {
+export class Login {
     constructor(page) {
         this.page = page
+    }
+
+    async do(email, password) {
+        await this.visit()
+        await this.submit(email, password)
+        await this.isLoggedIn()
     }
 
     async visit() {
@@ -22,5 +28,16 @@ export class LoginPage {
         //último caractere na classe do css
         const alert = this.page.locator("span[class$='alert']") 
         await expect(alert).toHaveText(text)
+    }
+
+    async isLoggedIn() {
+        // aguarda o carregamento da rede
+        await this.page.waitForLoadState('networkidle')
+
+        const logoutLink = this.page.locator('a[href="/logout"]')
+        await expect(logoutLink).toBeVisible()
+
+        // verificando se na url tem a palavra admin
+        await expect(this.page).toHaveURL(/.*admin/)
     }
 }

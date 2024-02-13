@@ -28,9 +28,7 @@ test('deve poder cadastrar um novo filme', async ({ page }) => {
     
     await executeSQL(`DELETE FROM movies WHERE title = '${movie.title}';`)
 
-    await page.login.visit()
-    await page.login.submit(email, password)
-    await page.movies.isLoggedIn()
+    await page.login.do(email, password)
 
     await page.movies.create(movie.title, movie.overview, movie.company, movie.release_year)
 
@@ -38,9 +36,7 @@ test('deve poder cadastrar um novo filme', async ({ page }) => {
 })
 
 test('não deve cadastrar quando os campos obrigatórios não são preenchidos', async ({ page }) => {
-    await page.login.visit()
-    await page.login.submit(email, password)
-    await page.movies.isLoggedIn()
+    await page.login.do(email, password)
 
     await page.movies.goForm()
     await page.movies.submit()
