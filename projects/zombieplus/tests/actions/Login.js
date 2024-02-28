@@ -5,10 +5,10 @@ export class Login {
         this.page = page
     }
 
-    async do(email, password) {
+    async do(email, password, username) {
         await this.visit()
         await this.submit(email, password)
-        await this.isLoggedIn()
+        await this.isLoggedIn(username)
     }
 
     async visit() {
@@ -30,7 +30,12 @@ export class Login {
         await expect(alert).toHaveText(text)
     }
 
-    async isLoggedIn() {
+    async isLoggedIn(username) {
+        const loggedUser = this.page.locator('.logged-user')
+        await expect(loggedUser).toHaveText(`Olá, ${username}`)
+    }
+
+/*     async isLoggedIn() {
         // aguarda o carregamento da rede
         await this.page.waitForLoadState('networkidle')
 
@@ -39,5 +44,5 @@ export class Login {
 
         // verificando se na url tem a palavra admin
         await expect(this.page).toHaveURL(/.*admin/)
-    }
+    } */
 }

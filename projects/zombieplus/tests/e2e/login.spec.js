@@ -6,7 +6,7 @@ const password = 'pwd123';
 test('deve logar como adminstrador', async ({ page }) => {
     await page.login.visit()
     await page.login.submit(email, password)
-    await page.login.isLoggedIn()
+    await page.login.isLoggedIn('Admin')
 })
 
 test('não deve logar com senha incorreta', async ({ page }) => {
