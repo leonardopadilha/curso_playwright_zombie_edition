@@ -13,7 +13,7 @@ export class Movies {
         await this.page.getByRole('button', {name: 'Cadastrar'}).click()
     }
 
-    async create(title, overview, company, release_year) {
+    async create(title, overview, company, release_year, cover) {
         //o selector abaixo termina com register
         this.goForm()
         //await this.page.locator('#title').fill(title)
@@ -44,6 +44,9 @@ export class Movies {
         await this.page.locator('.react-select__option')
                             .filter({ hasText: release_year })
                                 .click()
+
+        await this.page.locator('input[name=cover]')
+                .setInputFiles('tests/e2e/support/fixtures' + cover)
 
         this.submit()
     }
