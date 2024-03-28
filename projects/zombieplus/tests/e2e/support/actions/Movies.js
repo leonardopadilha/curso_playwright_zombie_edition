@@ -13,7 +13,7 @@ export class Movies {
         await this.page.getByRole('button', {name: 'Cadastrar'}).click()
     }
 
-    async create(title, overview, company, release_year, cover) {
+    async create(title, overview, company, release_year, cover, featured) {
         //o selector abaixo termina com register
         this.goForm()
         //await this.page.locator('#title').fill(title)
@@ -45,8 +45,13 @@ export class Movies {
                             .filter({ hasText: release_year })
                                 .click()
 
+        // realizando upload do arquivo                        
         await this.page.locator('input[name=cover]')
                 .setInputFiles('tests/e2e/support/fixtures' + cover)
+
+        if (featured) {
+            await this.page.locator('.featured .react-switch').click()
+        }
 
         this.submit()
     }
