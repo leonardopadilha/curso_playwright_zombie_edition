@@ -22,18 +22,33 @@ test.beforeEach(({ page }) => {
     toast = new Toast(page)
 }) */
 
+test.beforeAll(async () => {
+    await executeSQL(`DELETE FROM movies;`)
+})
+
 test('deve poder cadastrar um novo filme', async ({ page }) => {
     
     // é importante estar logado
     const movie = data.create;
     
-    await executeSQL(`DELETE FROM movies WHERE title = '${movie.title}';`)
-
     await page.login.do(email, password, username)
 
     await page.movies.create(movie.title, movie.overview, movie.company, movie.release_year, movie.cover, movie.featured)
 
     await page.toast.containText('Cadastro realizado com sucesso!')
+})
+
+test('não deve cadastrar quando o título é duplicado', async ({ page }) => {
+    
+    // é importante estar logado
+    const movie = data.duplicate;
+    
+    await page.login.do(email, password, username)
+    await page.movies.create(movie.title, movie.overview, movie.company, movie.release_year, movie.cover, movie.featured)
+    await page.toast.containText('Cadastro realizado com sucesso!')
+    
+    await page.movies.create(movie.title, movie.overview, movie.company, movie.release_year, movie.cover, movie.featured)
+    await page.toast.containText('Este conteúdo já encontra-se cadastrado no catálogo')
 })
 
 test('não deve cadastrar quando os campos obrigatórios não são preenchidos', async ({ page }) => {
