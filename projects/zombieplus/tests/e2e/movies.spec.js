@@ -1,5 +1,5 @@
 //const { test } = require('@playwright/test')
-const { test } = require('./support')
+const { test, expect } = require('./support')
 
 const data = require('./support/fixtures/movies.json')
 const { executeSQL } = require('./support/database')
@@ -38,15 +38,14 @@ test('deve poder cadastrar um novo filme', async ({ page }) => {
     await page.toast.containText('Cadastro realizado com sucesso!')
 })
 
-test('não deve cadastrar quando o título é duplicado', async ({ page }) => {
+test('não deve cadastrar quando o título é duplicado', async ({ page, request }) => {
     
     // é importante estar logado
     const movie = data.duplicate;
+
+    await request.api.postMovie(movie)
     
-    await page.login.do(email, password, username)
-    await page.movies.create(movie.title, movie.overview, movie.company, movie.release_year, movie.cover, movie.featured)
-    await page.toast.containText('Cadastro realizado com sucesso!')
-    
+    await page.login.do(email, password, username)    
     await page.movies.create(movie.title, movie.overview, movie.company, movie.release_year, movie.cover, movie.featured)
     await page.toast.containText('Este conteúdo já encontra-se cadastrado no catálogo')
 })
