@@ -11,22 +11,22 @@ test.beforeAll(async () => {
 
 test('deve cadastrar um lead na fila de espera', async ({ page }) => {
 
-  const leadMessage = "Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato!"
+  const leadMessage = "Agradecemos por compartilhar seus dados conosco. Em breve, nossa equipe entrará em contato."
   
   await page.leads.visit()
   await page.leads.openLeadModal()
   await page.leads.submitLeadForm(leadName, leadEmail)
-  await page.toast.containText(leadMessage)
+  await page.popup.haveText(leadMessage)
 });
 
 test('não deve cadastrar quando o email já existe', async ({ page }) => {
 
-let message = "O endereço de e-mail fornecido já está registrado em nossa fila de espera."
+let message = "Verificamos que o endereço de e-mail fornecido já consta em nossa lista de espera. Isso significa que você está um passo mais perto de aproveitar nossos serviços."
 
   await page.leads.visit()
   await page.leads.openLeadModal()
   await page.leads.submitLeadForm(leadName, leadEmail)
-  await page.toast.containText(message)
+  await page.popup.haveText(message)
 });
 
 test('não deve cadastrar quando o email já salvo através da API', async ({ page, request }) => {
@@ -34,7 +34,7 @@ test('não deve cadastrar quando o email já salvo através da API', async ({ pa
   const name = faker.person.fullName()
   const email = faker.internet.email()
 
-  let message = "O endereço de e-mail fornecido já está registrado em nossa fila de espera."
+  let message = "Verificamos que o endereço de e-mail fornecido já consta em nossa lista de espera. Isso significa que você está um passo mais perto de aproveitar nossos serviços."
 
   const newLead = await request.post('http://localhost:3333/leads', {
     data: {
@@ -48,7 +48,7 @@ test('não deve cadastrar quando o email já salvo através da API', async ({ pa
     await page.leads.visit()
     await page.leads.openLeadModal()
     await page.leads.submitLeadForm(name, email)
-    await page.toast.containText(message)
+    await page.popup.haveText(message)
   });
 
 test('não deve cadastrar com email incorreto', async ({ page }) => {
