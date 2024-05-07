@@ -15,13 +15,13 @@
     "company": "Paramount Pictures",
     "cover": "/covers/movies/mortos-vivos.jpg"
   },
-  "exterminio": {
-    "title": "Extermínio",
+  "to_remove": {
+    "title": "Exterminio",
     "overview": "Um vírus transforma a população em zumbis rápidos e agressivos, levando a luta pela sobrevivência nas ruas de Londres.",
     "featured": false,
-    "release_year": 2002,
-    "company": "DNA Films",
-    "cover": "/caminho/para/exterminio.png"
+    "release_year": 1968,
+    "company": "Paramount Pictures",
+    "cover": "/covers/movies/exterminio.png"
   },
   "resident_evil_o_hospede_maldito": {
     "title": "Resident Evil: O Hóspede Maldito",
