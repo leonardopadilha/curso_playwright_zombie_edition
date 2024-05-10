@@ -1,10 +1,13 @@
 const { test, expect } = require('./support')
 const { faker } = require('@faker-js/faker')
+const { executeSQL } = require('./support/database')
 
 let leadName;
 let leadEmail;
 
 test.beforeAll(async () => {
+  await executeSQL(`DELETE FROM leads;`)
+
   leadName = faker.person.fullName()
   leadEmail = faker.internet.email()
 })
