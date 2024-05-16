@@ -23,60 +23,38 @@
     "company": "Paramount Pictures",
     "cover": "/covers/movies/exterminio.png"
   },
-  "resident_evil_o_hospede_maldito": {
-    "title": "Resident Evil: O Hóspede Maldito",
-    "overview": "Um grupo de soldados e cientistas enfrenta horrores geneticamente modificados em uma instalação subterrânea da Umbrella Corporation.",
-    "featured": true,
-    "release_year": 2002,
-    "company": "Screen Gems",
-    "cover": "/caminho/para/resident_evil_o_hospede_maldito.png"
-  },
-  "madrugada_dos_mortos": {
-    "title": "Madrugada dos Mortos",
-    "overview": "Sobreviventes se refugiam em um shopping enquanto enfrentam hordas de zumbis após um apocalipse.",
-    "featured": false,
-    "release_year": 2004,
-    "company": "Universal Pictures",
-    "cover": "/caminho/para/madrugada_dos_mortos.png"
-  },
-  "zumbilandia": {
-    "title": "Zumbilândia",
-    "overview": "Um grupo improvável de sobreviventes se junta para enfrentar zumbis em um mundo pós-apocalíptico.",
-    "featured": true,
-    "release_year": 2009,
-    "company": "Columbia Pictures",
-    "cover": "/caminho/para/zumbilandia.png"
-  },
-  "guia_de_sobrevivencia_a_zumbis": {
-    "title": "Guia de Sobrevivência a Zumbis",
-    "overview": "Um jovem tenta sobreviver a um apocalipse zumbi com a ajuda de um guia em forma de livro.",
-    "featured": false,
-    "release_year": 2015,
-    "company": "Lionsgate",
-    "cover": "/caminho/para/guia_de_sobrevivencia_a_zumbis.png"
-  },
-  "eu_sou_a_lenda": {
-    "title": "Eu Sou a Lenda",
-    "overview": "Um cientista luta para sobreviver como o último homem na Terra, cercado por mutantes noturnos.",
-    "featured": false,
-    "release_year": 2007,
-    "company": "Warner Bros. Pictures",
-    "cover": "/caminho/para/eu_sou_a_lenda.png"
-  },
-  "orgulho_preconceito_zumbis": {
-    "title": "Orgulho + Preconceito + Zumbis",
-    "overview": "Uma reimaginação do clássico de Jane Austen, com a adição de uma epidemia zumbi.",
-    "featured": false,
-    "release_year": 2016,
-    "company": "Screen Gems",
-    "cover": "/caminho/para/orgulho_preconceito_zumbis.png"
-  },
-  "train_to_busan": {
-    "title": "Train to Busan",
-    "overview": "Passageiros de um trem expresso lutam pela sobrevivência durante um surto zumbi na Coreia do Sul.",
-    "featured": true,
-    "release_year": 2016,
-    "company": "Next Entertainment World",
-    "cover": "/caminho/para/train_to_busan.png"
+  "search": {
+    "input": "zumbi",
+    "outputs": [
+      "Zumbilândia",
+      "Guia de Sobrevivência a Zumbis",
+      "Orgulho e Preconceito e Zumbi"
+    ],
+    "data": [
+      {
+        "title": "Zumbilândia",
+        "overview": "Um grupo improvável de sobreviventes se junta para enfrentar zumbis em um mundo pós-apocalíptico.",
+        "featured": true,
+        "release_year": 2009,
+        "company": "Netflix",
+        "cover": "/caminho/para/zumbilandia.png"
+      },
+      {
+        "title": "Guia de Sobrevivência a Zumbis",
+        "overview": "Um jovem tenta sobreviver a um apocalipse zumbi com a ajuda de um guia em forma de livro.",
+        "featured": false,
+        "release_year": 2015,
+        "company": "Universal Pictures",
+        "cover": "/caminho/para/guia_de_sobrevivencia_a_zumbis.png"
+      },
+      {
+        "title": "Orgulho e Preconceito e Zumbi",
+        "overview": "Uma reimaginação do clássico de Jane Austen, com a adição de uma epidemia zumbi.",
+        "featured": false,
+        "release_year": 2016,
+        "company": "Warner Bros. Pictures",
+        "cover": "/caminho/para/orgulho_preconceito_zumbis.png"
+      }
+    ]
   }
 }
