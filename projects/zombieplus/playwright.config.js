@@ -21,7 +21,13 @@ module.exports = defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: [
+    ['list'],
+    ['html']
+    // é possível adicionar o arquivo json no elastic search e usar o grafana ou kibana para
+    // criar um dashboard de teste de regressão
+    //['json', { outputFile: 'test-results.json' }]
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
@@ -31,7 +37,12 @@ module.exports = defineConfig({
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'off',
-    baseURL: process.env.BASE_URL
+    baseURL: process.env.BASE_URL,
+    // Resolução mínima para o projeto rodar
+    viewport: {
+      width: 1440,
+      height: 900,
+    }
   },
 
   /* Configure projects for major browsers */

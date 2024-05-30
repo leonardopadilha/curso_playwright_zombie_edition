@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test:terminal": "npx playwright test",
     "test:play:ui": "npx playwright test --ui",
     "test:play:h": "npx playwright test --headed"
   },
