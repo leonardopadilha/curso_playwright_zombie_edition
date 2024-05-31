@@ -23,7 +23,8 @@ module.exports = defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['list'],
-    ['html']
+    ['playwright-tesults-reporter', {'tesults-target': process.env.TOKEN}]
+    //['html']
     // é possível adicionar o arquivo json no elastic search e usar o grafana ou kibana para
     // criar um dashboard de teste de regressão
     //['json', { outputFile: 'test-results.json' }]
@@ -36,7 +37,7 @@ module.exports = defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    video: 'off',
+    video: 'retain-on-failure',
     baseURL: process.env.BASE_URL,
     // Resolução mínima para o projeto rodar
     viewport: {
